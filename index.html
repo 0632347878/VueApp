@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>VUE</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="apple-touch-icon" href="icon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id="app">
+		<div class="product">
+			<div class="product-image">
+				<img class="product__img" v-bind:src="image" v-bind:alt="altText">
+				<span class="sale-tag" v-if="inventory > 80">{{ onSale }}</span>
+			</div>
+			<div class="product-info">
+				<h1 class="product__title">{{ product }}</h1>
+				<!--<p v-if="inStock">In stock</p>-->
+				<!--<p v-else>Out of stock</p>-->
+				<p v-show="inStock">In stock</p>
+				<p v-if="inventory > 10">In stock</p>
+				<p v-else-if="inventory > 0 && inventory < 10">Almost sold out!</p>
+				<p v-else>Out of stock</p>
+				<ul>
+					<li class="product-info__item" v-for="detail in details">{{detail}}</li>
+				</ul>
+				<h3>Colors</h3>
+				<ul>
+					<li	@mouseover="updateProduct(variant.variantImage)"
+							@mouseout="reUpdateProduct()"
+							class="product-info__item product-info__item-color"
+							v-for="variant in variants"
+							:key="variant.variantId">
+						  {{variant.variantColor}}
+					</li>
+				</ul>
+				<h3>Available sizes</h3>
+				<ul>
+					<li v-for="size in sizes"
+							class="prodict-info__item">
+						{{size}}
+					</li>
+				</ul>
+				<button v-on:click="addToCart()">Add to cart</button>
+				<div class="cart">
+					<p class="cart__text">Cart <span>({{cart}})</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="js/main.js"></script>
+</html>
