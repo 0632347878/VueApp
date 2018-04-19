@@ -21,11 +21,28 @@ var app = new Vue ({
    }
   ],
   sizes: ["s", "m", "l", "xl", "xxl", "xxx"],
-  cart: 0
+  cart: 0,
+  h3Color: '#000',
+  styleObject: {
+   color: 'red',
+   fontSize: '16px'
+  },
+  activeClass: true,
+  errorClass: false,
+  isActive: true,
+  activeClassName: 'active'
  },
  methods: {
   addToCart() {
    this.cart += 1
+  },
+  removeFromCart() {
+   if(this.cart <= 0) {
+    this.cart = 0;
+   }
+   else {
+    this.cart -= 1
+   }
   },
   updateProduct(variantImage) {
    this.image = variantImage
@@ -35,3 +52,4 @@ var app = new Vue ({
   }
  }
 });
+Vue.config.devtools = true;

@@ -12,7 +12,7 @@
 	<!-- Place favicon.ico in the root directory -->
 
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/all.css">
 </head>
 <body>
 	<div id="app">
@@ -32,12 +32,14 @@
 				<ul>
 					<li class="product-info__item" v-for="detail in details">{{detail}}</li>
 				</ul>
-				<h3>Colors</h3>
-				<ul>
+				<h3 :style="{ color: h3Color }">Colors</h3>
+				<ul class="product-info__list">
 					<li	@mouseover="updateProduct(variant.variantImage)"
 							@mouseout="reUpdateProduct()"
-							class="product-info__item product-info__item-color"
+							class="product-info__item product-info__item-color color-box"
+							:class="{ active: activeClass, 'text-danger': errorClass }"
 							v-for="variant in variants"
+							:style="{backgroundColor: variant.variantColor}"
 							:key="variant.variantId">
 						  {{variant.variantColor}}
 					</li>
@@ -45,13 +47,23 @@
 				<h3>Available sizes</h3>
 				<ul>
 					<li v-for="size in sizes"
-							class="prodict-info__item">
+							class="prodict-info__item"
+							:class="[isActive ? activeClassName : '']">
 						{{size}}
 					</li>
 				</ul>
-				<button v-on:click="addToCart()">Add to cart</button>
+				<button v-on:click="addToCart()"
+								:disabled="!inStock"
+								class="btn-cart"
+								:class="{ disabledBtn: !inStock }">
+								Add to cart
+				</button>
+				<button v-on:click="removeFromCart()"
+								:class="{ disabledBtn: !inStock }"
+								:disabled="!inStock"
+								class="btn-cart">Remove from cart</button>
 				<div class="cart">
-					<p class="cart__text">Cart <span>({{cart}})</span></p>
+					<p class="cart__text">Cart <span :style="styleObject">({{cart}})</span></p>
 				</div>
 			</div>
 		</div>
