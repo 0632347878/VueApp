@@ -7,7 +7,7 @@ var app = new Vue ({
   altText: "A pair of socks",
   // inStock: true,  // changed on computed
   inventory: Infinity,
-  onSale: "On Sale!", //through v-show
+  showOnSale: "On Sale!", //through v-show
   details: [ "80% cotton", "20% polyester", "Gender-neutral" ],
   variants: [
    {
@@ -77,7 +77,14 @@ var app = new Vue ({
   },
   inStock() {
    return this.variants[this.selectedVariant].variantQuantity
+  },
+  onSaleAction() {
+   if(this.onSale) {
+    return this.brand + ' ' + this.product
+   }
   }
  }
 });
 Vue.config.devtools = true;
+
+
