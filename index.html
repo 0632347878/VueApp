@@ -16,13 +16,13 @@
 	<div id="app">
 		<div class="product">
 			<div class="product-image">
-				<img id="product-image" class="product__img" v-bind:src="image" v-bind:alt="altText">
+				<img id="product-image" class="product__img" :src="image" :alt="altText">
 				<span class="sale-tag"
 							@mouseenter="animatedBtn(event)"
 							v-if="inventory > 80">{{ showOnSale }}</span>
 			</div>
 			<div class="product-info">
-				<h1 class="product__title">{{ title }} {{ onSaleAction }}</h1>
+				<h1 class="product__title">{{ title }}</h1>
 				<!--trivial conditions-->
 				<!--<p v-if="inStock">In stock</p>-->
 				<!--<p v-else>Out of stock</p>-->

@@ -62,7 +62,7 @@ var app = new Vue ({
   //   imageRefer.setAttribute("src", this.variants[0].variantImage);
   // }
   animatedBtn(event) {
-   let eventAlias = event.target ;
+   var eventAlias = event.target ;
    eventAlias.className += " btn--animate";
    setTimeout(function(){
     eventAlias.className = eventAlias.className.replace("btn--animate", ""); }, 1000);
@@ -86,5 +86,7 @@ var app = new Vue ({
  }
 });
 Vue.config.devtools = true;
+
+
 
 
